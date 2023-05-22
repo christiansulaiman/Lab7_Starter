@@ -96,7 +96,7 @@ async function getRecipes() {
   //            function (we call these callback functions). That function will
   //            take two parameters - resolve, and reject. These are functions
   //            you can call to either resolve the Promise or Reject it.
-  return new Promise(async (resolve,reject) => {
+  return new Promise(async (resolve, reject) => {
     // A4
     for (let url of RECIPE_URLS){
       // A5
@@ -109,7 +109,7 @@ async function getRecipes() {
         recipesArr.push(responseJSON);
 
         // A9
-        if (recipesArr.length == RECIPE_URLS.length){
+        if (recipesArr.length === RECIPE_URLS.length){
           saveRecipesToStorage(recipesArr);
           resolve(recipesArr);
         }
