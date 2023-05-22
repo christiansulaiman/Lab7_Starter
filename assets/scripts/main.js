@@ -46,6 +46,20 @@ function initializeServiceWorker() {
   // sw.js is executed.
   // B1. TODO - Check if 'serviceWorker' is supported in the current browser
   // B2. TODO - Listen for the 'load' event on the window object.
+  if ("serviceWorker" in navigator){
+    window.addEventListener("load", async () => {
+      try {
+        // B3
+        const registration = await navigator.serviceWorker.register("/sw.js");
+        // B4
+        console.log("Service Worker has been successfully registered");
+      }
+      // B5
+      catch (error){
+        console.log(`Registration failed with ${error}`);
+      }
+    })
+  }
   // Steps B3-B6 will be *inside* the event listener's function created in B2
   // B3. TODO - Register './sw.js' as a service worker (The MDN article
   //            "Using Service Workers" will help you here)
@@ -84,7 +98,7 @@ async function getRecipes() {
   //            you can call to either resolve the Promise or Reject it.
   return new Promise(async (resolve,reject) => {
     // A4
-    for (let url in RECIPE_URLS){
+    for (let url of RECIPE_URLS){
       // A5
       try{
         // A6
